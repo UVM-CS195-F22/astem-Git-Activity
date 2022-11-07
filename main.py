@@ -4,10 +4,16 @@ import sys
 
 def do_query(cursor, table_name, column_name):
 
-    cursor.execute(f"SELECT {column_name} FROM {table_name};")
+    cursor.execute(f"SELECT {column_name} FROM {table_name} LIMIT 5;")
     data = cursor.fetchall()
+    st = ""
     for x in data:
-        print(x)
+
+        for y in x:
+            st += y
+
+        st += "\n"
+    return st
 
 def establish_connection(database_name):
     try:
@@ -24,7 +30,9 @@ def main():
         table = sys.argv[2]
         column = sys.argv[3]
         
-        establish_connection(db)
+        connection, cursor = establish_connection(db)
+
+        print(do_query(cursor, table, column))
         
         print(f"{db}, {table}, {column}")
     else:
