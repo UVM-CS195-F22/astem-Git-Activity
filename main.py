@@ -3,7 +3,7 @@ import sys
 
 def do_query(cursor, table_name, column_name):
 
-    cursor.execute(f"SELECT {column_name} FROM {table_name};"
+    cursor.execute(f"SELECT {column_name} FROM {table_name};")
     data = cursor.fetchall()
     for x in data:
         print(x)
